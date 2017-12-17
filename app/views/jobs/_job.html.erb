@@ -1,0 +1,16 @@
+<li>
+	<h3><%=link_to job.title, job %></h3>
+	<p><%= job.description %></p>
+	<% if logged_in? and current_user.role == "admin" %>
+    <%= link_to "delete", job, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+    <% if job.approved_by %>
+      <%= link_to "update review", job, class: "review" %>
+    <% else %>
+      <%= link_to "add review", job, class: "review" %>
+    <% end %>
+
+    <span class="review">Posted at: </span> <%= job.created_at %>
+     <span class="review">By</span> <%= link_to job.user.name, job.user %>
+  <% end %>
+</li>

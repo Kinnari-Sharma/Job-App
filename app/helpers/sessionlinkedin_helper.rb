@@ -1,0 +1,2 @@
+module SessionlinkedinHelper
+end

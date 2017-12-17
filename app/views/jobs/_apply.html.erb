@@ -1,0 +1,17 @@
+<% if current_user.resume? %>
+
+	<% if applied(@job.id, current_user.id) %>
+		<small>You have already applied for the job!</small>
+	<% else %>	
+	  <%= form_for(@applied, url: applieds_path) do |f| %>
+	  	<div><%= f.hidden_field :job_id, value: @job.id %></div>
+	  	<div><%= f.hidden_field :user_id, value: current_user.id %></div>
+	    <%= f.submit "Apply Now!", class: "btn btn-primary form-control" %>
+		<% end %>
+	<% end %>
+
+<% else %>
+	
+	<p class="center">Please <%= link_to "Upload", current_user %> your resume to apply!</p>
+
+<% end %>

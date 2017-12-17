@@ -1,0 +1,22 @@
+<% provide(:title, "View Post") %>
+<h2><%= @post_vacancy.user.name %></h2>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="post">
+		  <h3>Introduction:</h3>
+		  <p class="desc"><%= @post_vacancy.description %></p>
+		  <span class="type">Category: </span> <%= @post_vacancy.category %> <br>
+		  <span class="type">Phone Number: </span> <%= @post_vacancy.phone %> <br>
+		  <span class="type">City: </span> <%= @post_vacancy.city %> <br>
+		  <span class="type">Email: </span> <%= @post_vacancy.user.email %> <br>
+		  <% if @post_vacancy.user.resume.present? && (current_user.role == "recruiter" ||
+		  																						 current_user == @post_vacancy.user) %>
+		  	<span class="type">Resume: </span> <%= link_to "Uploaded Resume", 
+		  																			@post_vacancy.user.resume.url, target: "_blank" %> <br>
+		  <% end %>
+		</div>
+	</div>
+	
+</div>
+

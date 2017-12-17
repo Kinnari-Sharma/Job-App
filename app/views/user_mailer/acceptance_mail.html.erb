@@ -1,0 +1,19 @@
+<h1>Interview call letter from <%= @job.cname %></h1>
+
+<p>Hi <%= @user.name %>,</p>
+
+<p>We are glad to inform you that your CV has been shortlisted for our job requirement.
+For further selection process, you have been invited to attend the interview.</p>
+<p>Details:</p>
+
+<p>Company:  <%= @job.cname %></p>
+<p>Job Type: <%= @job.jobtype %></p>
+<p>City: <%= @job.location %></p>
+<p>Interview Date: <%= Date.today + 7 %></p>
+<p>Job Link: <%= link_to "#{@job.url}", @job.url %></p>
+
+<p>Wish you best of luck!!</p>
+
+<p>Regards,</p>
+
+<%= @job.cname %>

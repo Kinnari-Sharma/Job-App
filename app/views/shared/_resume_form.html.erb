@@ -1,0 +1,10 @@
+<div class = "resume">
+	<%= form_for @user do |f| %>
+	  <div class = "form-group">
+	    <%= render 'shared/error_messages', object: f.object %>
+	    <%= f.label :resume, "Update Resume" %>
+	    <%= f.file_field :resume, class: "form-control" %>
+	  </div>
+	  <%= f.submit "Update Resume", class: "btn btn-primary form-control"%>
+	<% end %>
+</div>

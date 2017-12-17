@@ -1,0 +1,19 @@
+<% if logged_in? %>
+  <% if current_user.role == "recruiter" %>
+	  <%= render 'shared/recruiter_home' %>
+	<% elsif current_user.role == "job-seeker" %>
+    <%= render 'shared/jobseeker_home' %>
+  <% else %>
+    <%= render 'admin/show'%>
+	<% end %>
+
+<% else %>
+
+  <div class="center jumbotron">
+    <h1>Welcome to the Job App</h1>
+	  <%= link_to "Register", signup_path, class: "btn btn-lg btn-primary" %>
+	</div>
+
+<% end %>
+
+

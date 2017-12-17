@@ -1,0 +1,10 @@
+<li>
+	<h3><%=link_to post_vacancy.category, post_vacancy %></h3>
+	<p><%= post_vacancy.description %></p>
+	<% if logged_in? and current_user.role == "admin" %>
+    <%= link_to "delete", post_vacancy, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+
+    <span class="review">Posted by: </span><%= link_to post_vacancy.user.name, post_vacancy.user %>
+  <% end %>   
+</li>

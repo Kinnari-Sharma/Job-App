@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-1">
+<% if @over_ten %>
+   <%= link_to 'Show Previous', '?m=all' %>
+<% end %>
+
+<div class="ui segment">
+  <% @messages.each do |message| %>
+    <% if message.body %>
+      <% user = User.find(message.user_id) %>
+        <div class="content">
+          <div class="header"><strong><%= user.name %></strong></div>
+            <div class="list">
+              <%= message.body %>
+            </div>
+        </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+  <div class="field form-group">
+    <%= f.text_area :body, class: "form-control", size: "5x5" %>
+  </div>
+    <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+  <div>
+    <%= f.submit "Reply", class: " btn btn-primary" %>
+  </div>
+
+<% end %>
+
+</div>
+</div>

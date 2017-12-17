@@ -1,0 +1,46 @@
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="center">All Jobs</h3>
+		<%= render 'jobs/jobs' %>
+	</div>
+
+	<div class="col-md-4">
+		<div class = "category">
+			<h3 class="center">Edit Job Sectors</h3>
+			<% unless @categories.nil? %>
+				<ul class="categories">
+					<% @categories.each do |c| %>
+					  <li><%= c.job_category %> <%=link_to "delete", c, method: :delete,
+					  																		   data: {confirm: "Are you sure?"} %></li>
+					<% end %>
+				</ul>
+			<% end %>
+			<%= form_for @category do |f| %>
+			  <div class = "form-group" >
+					<%= f.label :job_category, "Job Sector: " %>
+			  	<%= f.text_field :job_category, class: "form-control" %>
+				</div>
+			  <%= f.submit "Add", class: "btn-primary form-control" %>
+			<% end %>
+		</div>
+
+		<div class = "category">
+			<h3 class="center">Edit Job Type</h3>
+			<% unless @jobtypes.nil? %>
+				<ul class="categories">
+					<% @jobtypes.each do |j| %>
+					  <li><%= j.jobtype %> <%=link_to "delete", j, method: :delete,
+					  																		   data: {confirm: "Are you sure?"} %></li>
+					<% end %>
+				</ul>
+			<% end %>
+			<%= form_for @jobtype do |f| %>
+			  <div class = "form-group" >
+					<%= f.label :jobtype, "Job Type: " %>
+			  	<%= f.text_field :jobtype, class: "form-control" %>
+				</div>
+			  <%= f.submit "Add", class: "btn-primary form-control" %>
+			<% end %>
+			</div>
+	</div>
+</div>

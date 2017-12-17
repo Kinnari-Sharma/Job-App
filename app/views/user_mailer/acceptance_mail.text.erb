@@ -1,0 +1,20 @@
+Interview call letter from <%= @job.cname %>
+
+Hi <%= @user.name %>,
+
+We are glad to inform you that your CV has been shortlisted for our job requirement.
+For further selection process, you have been invited to attend the interview.
+
+Details:
+
+Company:  <%= @job.cname %>
+Job Type: <%= @job.jobtype %>
+City: <%= @job.location %>
+Interview Date: <%= Date.today + 7 %>
+Job Link: <%= @job.url %>
+
+Wish you best of luck!!
+
+Regards,
+
+<%= @job.cname %>
