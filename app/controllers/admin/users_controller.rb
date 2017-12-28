@@ -10,7 +10,7 @@ module Admin
   	
   	def destroy
     	User.find(params[:id]).destroy
-    	redirect_to users_url, flash: { success: "User deleted" }
+    	redirect_to admin_users_url, flash: { success: "User deleted" }
   	end
   
   private

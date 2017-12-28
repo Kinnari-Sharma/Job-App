@@ -313,3 +313,40 @@ div.search{
   margin: 10px;
   }
 }
+
+.mailbox{
+  padding-bottom: 20px;
+  h3{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    color: #096009;
+    text-decoration: underline;
+  }
+
+  .item {
+  float: left;
+  li{
+    list-style: none;
+    font-size: 16px;
+    margin: 10px 0 10px 0;
+    a{
+      color: green;
+      &:hover{
+        color: green;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      &.message-job{
+        color: blue;
+        margin-left: 30px;
+      }
+    }
+
+  }
+  }
+  p{
+    margin-left: 20px;
+    color: green;
+  }
+}
