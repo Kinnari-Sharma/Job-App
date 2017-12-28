@@ -1,6 +1,8 @@
-<% if @jobs.any? %>
-	<h3 class="center">Jobs Posted</h3>
-	<%= render 'jobs/jobs' %>
-<% else %>
-  <p>You have not posted any jobs yet!</p>
+<% unless current_user.admin? %>
+	<% if @jobs.any? %>
+		<h3 class="center">Jobs Posted</h3>
+		<%= render 'jobs/jobs' %>
+	<% else %>
+	  <p>You have not posted any jobs yet!</p>
+	<% end %>
 <% end %>

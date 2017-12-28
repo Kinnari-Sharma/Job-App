@@ -1,15 +1,13 @@
 class AppliedsController < ApplicationController
 
-#  def new
- # 	@applied = Applied.new
-  #end
-
 	def create
 		@applied = Applied.new(applied_params)
 		if @applied.save
-			redirect_to job_path(params[:applied][:job_id]), flash: {success: "Successfully Applied for the job" }
+			redirect_to job_path(params[:applied][:job_id]),
+																		 flash: {success: "Successfully Applied for the job" }
 		else
-			render job_path(params[:applied][:id]), flash: { danger: "Cannot Apply" }
+			redirect_to job_path(params[:applied][:job_id]),
+																		 flash: { danger: "Please Upload Resume properly!" }
 		end
 	end
  
@@ -26,6 +24,6 @@ class AppliedsController < ApplicationController
 
 	private
 	  def applied_params
-	  	params.require(:applied).permit(:job_id, :user_id)
+	  	params.require(:applied).permit(:job_id, :user_id, :resume)
 	  end
 end

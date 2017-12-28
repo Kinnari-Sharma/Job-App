@@ -2,15 +2,11 @@
   <aside class = "col-md-4">
 	  <section class = "user_info">
 	    <%= render 'shared/user_info'%>
-	    <%= link_to "Post a Vacancy", new_post_vacancy_path, class: "btn btn-primary form-control vacancy"%>
-	    <% if @user.resume? %>
-	      <%= link_to "Uploaded Resume", @user.resume.url, target: "_blank" %>
-	    <% end %>
-	    <%= render 'shared/resume_form' %>
 	  </section>
-	  
+	    <%= render 'shared/aside'%>
   </aside>
   <div class = "col-md-8">
+  	<h3 class="center">Jobs</h3>
 	  <%= render 'jobs/jobs' %>
   </div>
 </div>

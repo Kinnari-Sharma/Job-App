@@ -6,28 +6,17 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-      <% unless @user.role == 'admin' %>
-        <%= @user.role %>
-      <% end %>
     </section>
-    <% if current_user == @user && @user.role == "recruiter" %>
+
+    <% if current_user == @user && !current_user.admin? %>
       <%= link_to "Post a Job!", new_job_path, class: "btn btn-primary form-control post-btn" %> 
-    <% elsif current_user == @user && @user.role == "job-seeker" %>
-      <%= link_to "Post a Vacancy!", new_post_vacancy_path, class: "btn btn-primary form-control" %>
-      <% if current_user.resume? %>
-        <%= link_to "Uploaded Resume", current_user.resume.url, target: "_blank"%>
-      <% end %>
-      <%= render 'shared/resume_form'%>
-    <% elsif @user.role == "job-seeker" && current_user.role == "recruiter" && @user.resume?%>
-      <%= link_to "Uploaded Resume", @user.resume.url, target: "_blank" %>
+      <%= render 'shared/aside'%>
     <% end %>
   </aside>
   
   <div class="col-md-8">
-    <% if @user.role == "recruiter" %>
-      <%= render 'recruiter' %>
-    <% elsif @user.role == "job-seeker" %>
-      <%= render 'jobseeker' %>
-    <% end %>
+
+    <%= render 'recruiter' %>
+    
   </div>
 </div>

@@ -10,14 +10,17 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   get '/admin', to: 'admin#show'
+  namespace :admin do
+    resources :categories, only: [ :create, :destroy]
+    resources :jobtypes, only: [ :create, :destroy]
+    resources :users, only: [:index, :destroy]
+    resources :jobs, only: [:destroy, :update]
+  end
   get '/auth/linkedin/callback', to: 'sessionlinkedin#create'
-  resources :users
-  resources :jobs
-  resources :post_vacancies, only: [:new, :create, :show, :destroy]
+  resources :users, except: [:index, :destroy]
+  resources :jobs, except: [:update, :destroy]
   resources :applieds, only: [:create, :update]
-  resources :categories, only: [ :create, :destroy]
-  resources :jobtypes, only: [ :create, :destroy]
   resources :conversations, only: [:index, :create] do
-    resources :messages
+    resources :messages, only: [:new, :index, :create]
   end
 end

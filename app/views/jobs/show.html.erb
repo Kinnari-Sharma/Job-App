@@ -13,30 +13,27 @@
 		  <span class="type">Location: </span> <%= @job.location %> <br>
 		  <span class="type">Visit Us: </span> <%= link_to "#{@job.url}", @job.url %> <br>
 		  <span class="type">Posted by: </span> <%= link_to "#{@job.user.name}", @job.user %> <br>
-		  <% if @job.approved_by %>
-   		  <span class="type">Admin's Rating and Review: </span> <%= @job.approved_by %>
+		  <% unless @job.approved? %>
+   		  <span>Not yet approved by admin! </span> 
    		<% end %>
 		</div>
-
-		<% if current_user.role == 'job-seeker'%>
-		  <%= render 'apply' %>
-
-		<% elsif current_user.role == 'admin' %>
-			<%= render 'admin_review' %>
-
-		<% else %>
-			<%= render 'applicants_list' %>
-
+			
+		<% unless current_user.admin? %>
+			<% if current_user.id == @job.user_id %>
+				<%= render 'applicants_list' %>
+			<% else %>
+			  <%= render 'apply' %>
+			<% end %>		
 		<% end %>
 	</div>
 
 	<div class="col-md-4 other-applicants">
-		<% if current_user.role == "job-seeker" && !@applicants.empty? && applied(@job.id, current_user.id)%>
+		<% if (!current_user.admin?) && !@applicants.empty? && applied(@job.id, current_user.id)%>
 			<h3>Other Applicants</h3>
 			<% @applicants.each do |user| %>
 	    	<% if user.id != current_user.id  %>
 	     		<li>
-	        	<span class="name"><%= user.name %></span> <%= link_to "Message", conversations_path(sender_id: current_user.id, recipent_id: user.id), method: :post%>
+	        	<span class="name"><%= user.name %></span> <%= link_to "Message", conversations_path(sender_id: current_user.id, recipent_id: user.id, job_id: @job.id), method: :post%>
 	      	</li>
 	    	<% end %>
 	  	<% end %>

@@ -5,7 +5,11 @@ class Job < ApplicationRecord
 	default_scope -> { order(created_at: :desc) }
 
 	validates :cname, presence: true
-  validates :contactmail, presence: true
+
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :contactmail, presence: true, length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
   validates :description, presence: true
   validates :location, presence: true
   validates :title, presence: true
@@ -26,6 +30,7 @@ class Job < ApplicationRecord
   	unless category.blank?
   		jobs = jobs.where("sector LIKE ?", "#{category}")
   	end
+    jobs = jobs.where(approved: true)
   	return jobs
   end
 

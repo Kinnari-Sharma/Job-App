@@ -10,12 +10,13 @@
 			<% unless @categories.nil? %>
 				<ul class="categories">
 					<% @categories.each do |c| %>
-					  <li><%= c.job_category %> <%=link_to "delete", c, method: :delete,
-					  																		   data: {confirm: "Are you sure?"} %></li>
+					  <li><%= c.job_category %> <%=link_to "delete", admin_category_path(c),
+					  																			method: :delete,
+					  																		  data: {confirm: "Are you sure?"} %></li>
 					<% end %>
 				</ul>
 			<% end %>
-			<%= form_for @category do |f| %>
+			<%= form_for @category, url: admin_categories_path do |f| %>
 			  <div class = "form-group" >
 					<%= f.label :job_category, "Job Sector: " %>
 			  	<%= f.text_field :job_category, class: "form-control" %>
@@ -29,12 +30,13 @@
 			<% unless @jobtypes.nil? %>
 				<ul class="categories">
 					<% @jobtypes.each do |j| %>
-					  <li><%= j.jobtype %> <%=link_to "delete", j, method: :delete,
-					  																		   data: {confirm: "Are you sure?"} %></li>
+					  <li><%= j.jobtype %> <%=link_to "delete", admin_jobtype_path(j),
+					  																			method: :delete,
+					  																		  data: {confirm: "Are you sure?"} %></li>
 					<% end %>
 				</ul>
 			<% end %>
-			<%= form_for @jobtype do |f| %>
+			<%= form_for @jobtype, url: admin_jobtypes_path do |f| %>
 			  <div class = "form-group" >
 					<%= f.label :jobtype, "Job Type: " %>
 			  	<%= f.text_field :jobtype, class: "form-control" %>

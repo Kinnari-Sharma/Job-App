@@ -1,7 +1,0 @@
-<%= form_for(@job, url: job_path) do |f| %>
-  <div class="form-group">
-  	<%= f.label :approved_by, "Write a review"%>
-  	<%= f.text_area :approved_by, class: "form-control" %>
-  </div>
-  <%= f.submit "Post", class: "btn btn-primary form-control" %>
-<% end %>

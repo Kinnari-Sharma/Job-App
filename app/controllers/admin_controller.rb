@@ -18,7 +18,7 @@ class AdminController < ApplicationController
     end
 
     def admin_user
-    	unless current_user.role == "admin"
+    	unless current_user.admin?
   	  	redirect_to current_user, flash: { danger:  "Access Denied!" }
   	  end
     end

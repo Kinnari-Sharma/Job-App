@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213131810) do
+ActiveRecord::Schema.define(version: 20171227114207) do
 
   create_table "applieds", force: :cascade do |t|
     t.integer "job_id", null: false
@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(version: 20171213131810) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "apply", default: false
+    t.string "resume_file_name"
+    t.string "resume_content_type"
+    t.integer "resume_file_size"
+    t.datetime "resume_updated_at"
     t.index ["job_id", "user_id"], name: "index_applieds_on_job_id_and_user_id", unique: true
   end
 
@@ -32,6 +36,8 @@ ActiveRecord::Schema.define(version: 20171213131810) do
     t.integer "recipent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "job_id"
+    t.index ["job_id"], name: "index_conversations_on_job_id"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -47,16 +53,9 @@ ActiveRecord::Schema.define(version: 20171213131810) do
     t.string "location"
     t.string "approved_by"
     t.integer "user_id"
+    t.boolean "approved", default: false
     t.index ["user_id", "created_at"], name: "index_jobs_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_jobs_on_user_id"
-  end
-
-  create_table "jobs_users", id: false, force: :cascade do |t|
-    t.integer "job_id", null: false
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id", "user_id"], name: "index_jobs_users_on_job_id_and_user_id"
   end
 
   create_table "jobtypes", force: :cascade do |t|
@@ -76,27 +75,9 @@ ActiveRecord::Schema.define(version: 20171213131810) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "post_vacancies", force: :cascade do |t|
-    t.string "name"
-    t.string "category"
-    t.text "description"
-    t.string "phone"
-    t.string "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_post_vacancies_on_user_id"
-  end
-
-  create_table "resumes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
@@ -105,6 +86,7 @@ ActiveRecord::Schema.define(version: 20171213131810) do
     t.integer "resume_file_size"
     t.datetime "resume_updated_at"
     t.string "uid"
+    t.boolean "admin", default: false
   end
 
 end

@@ -4,11 +4,12 @@ class Conversation < ApplicationRecord
 	
 	has_many :messages, dependent: :destroy
 
-	validates_uniqueness_of :sender_id, scope: :recipent_id
+	validates_uniqueness_of :sender_id, scope: [:recipent_id, :job_id]
 
-	scope :between, -> ( sender_id, recipent_id ) do
-		where("(conversations.sender_id = ? AND conversations.recipent_id = ?) OR
-			      (conversations.sender_id = ? AND conversations.recipent_id = ?)",
-			      sender_id, recipent_id, recipent_id, sender_id )
+	scope :between, -> ( sender_id, recipent_id, job_id ) do
+		where("(((conversations.sender_id = ? AND conversations.recipent_id = ?) OR
+			      (conversations.sender_id = ? AND conversations.recipent_id = ?)) AND 
+			      (conversations.job_id = ?))",
+			      sender_id, recipent_id, recipent_id, sender_id, job_id )
 	end
 end
