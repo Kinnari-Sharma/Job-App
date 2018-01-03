@@ -12,13 +12,36 @@ module Admin
     	User.find(params[:id]).destroy
     	redirect_to admin_users_url, flash: { success: "User deleted" }
   	end
+
+    def show
+      @user = current_user
+    end
   
+    def edit
+      @user = current_user
+    end
+
+    def update
+      @user = current_user
+
+      if @user.update_attributes(update_params)
+        redirect_to admin_user_path(@user), flash: { success: "Update Successful!" }
+      else
+        render 'edit'
+      end
+    end
+
   private
 
   	def logged_in_user
       unless logged_in?
         redirect_to login_url, flash: { danger: "Please log in." }
       end
+    end
+
+    def update_params
+      params.require(:user).permit(:name, :email, :password,
+                                   :password_confirmation)
     end
 
     # Confirms an admin user.
