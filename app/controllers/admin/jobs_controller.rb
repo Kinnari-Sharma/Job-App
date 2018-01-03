@@ -5,7 +5,11 @@ module Admin
 
 		def update
 	    @job = Job.find(params[:id])
-	    @job.update_attribute(:approved, true)
+      if @job.approved
+       @job.update_attribute(:approved, false) 
+	    else
+        @job.update_attribute(:approved, true)
+      end
 	    redirect_to admin_path
 	  end
 

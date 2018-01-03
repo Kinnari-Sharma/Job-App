@@ -2,7 +2,7 @@ class AdminController < ApplicationController
 	before_action :logged_in
 	before_action :admin_user
 	
-  def show
+  def home
     @jobs = Job.paginate(page: params[:page])
     @categories = Category.all
     @category = Category.new

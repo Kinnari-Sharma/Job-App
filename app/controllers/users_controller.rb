@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :show, :index, :destroy]
   before_action :correct_user,   only: [:edit, :update]
-  
+  before_action :if_logged_in, only: [:new, :create]
 
   def new
   	@user = User.new
@@ -55,7 +55,12 @@ class UsersController < ApplicationController
                                    :password_confirmation, :resume)
     end
 
-
+    def if_logged_in
+      if logged_in?
+        redirect_to current_user, flash: { warning: "Already logged in!" }
+      end
+    end
+    
     # Confirms a logged-in user.
     def logged_in_user
       unless logged_in?

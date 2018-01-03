@@ -1,6 +1,7 @@
 class Job < ApplicationRecord
 
 	belongs_to :user
+  has_many :applieds, dependent: :destroy
 
 	default_scope -> { order(created_at: :desc) }
 

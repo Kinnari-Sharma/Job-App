@@ -18,11 +18,6 @@ before_action :logged_in_user
   def show
   	@job = Job.find(params[:id])
     @applied = Applied.new
-    @applicants_ids = Applied.where(job_id: params[:id])
-    @applicants = []
-    @applicants_ids.each do |applicant|
-      @applicants.append(User.find(applicant.user_id))
-    end
   end
   
   def index
@@ -38,10 +33,6 @@ before_action :logged_in_user
     def job_params
     	params.require(:job).permit(:title, :description, :sector,
     														  :jobtype, :cname, :url, :contactmail, :location)
-    end
-
-    def update_params
-      params.require(:job).permit(:approved_by)
     end
 
     def logged_in_user

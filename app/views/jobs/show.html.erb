@@ -26,17 +26,4 @@
 			<% end %>		
 		<% end %>
 	</div>
-
-	<div class="col-md-4 other-applicants">
-		<% if (!current_user.admin?) && !@applicants.empty? && applied(@job.id, current_user.id)%>
-			<h3>Other Applicants</h3>
-			<% @applicants.each do |user| %>
-	    	<% if user.id != current_user.id  %>
-	     		<li>
-	        	<span class="name"><%= user.name %></span> <%= link_to "Message", conversations_path(sender_id: current_user.id, recipent_id: user.id, job_id: @job.id), method: :post%>
-	      	</li>
-	    	<% end %>
-	  	<% end %>
-  	<% end %>
-	</div>
 </div>

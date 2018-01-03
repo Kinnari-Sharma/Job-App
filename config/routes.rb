@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get '/admin', to: 'admin#show'
+  get '/admin', to: 'admin#home'
   namespace :admin do
     resources :categories, only: [ :create, :destroy]
     resources :jobtypes, only: [ :create, :destroy]

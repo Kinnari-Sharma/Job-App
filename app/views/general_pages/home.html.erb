@@ -1,7 +1,7 @@
 <% if logged_in? %>
   
   <% if current_user.admin? %>
-    <%= render 'admin/show'%>
+    <%= render 'admin/home'%>
   <% else %>
     <%= render 'shared/jobseeker_home' %>
   <% end %>

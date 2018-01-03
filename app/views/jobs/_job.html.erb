@@ -3,13 +3,15 @@
 	<h3><%=link_to job.title, job %></h3>
 	<p><%= job.description %></p>
 	<% if logged_in? and current_user.admin? %>
-    <%= link_to "reject", admin_job_path(job), method: :delete,
+    <%= link_to "delete", admin_job_path(job), method: :delete,
                                   data: { confirm: "You sure?" } %>
 
     <% if job.approved? %>
       <span class="review">approved</span>
+      <%= link_to "reject", admin_job_path(job), method: :patch, class: "review"%>
     <% else %>
       <%= link_to "approve", admin_job_path(job), method: :patch, class: "review"%>
+      <span class="review">rejected</span>
     <% end %>
 
     <span class="review">Posted at: </span> <%= job.created_at %>
