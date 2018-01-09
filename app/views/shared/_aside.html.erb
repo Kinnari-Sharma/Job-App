@@ -4,16 +4,4 @@
 <% end %>
 <%= render 'shared/resume_form'%>
 
-
-<% unless @applied_jobs.empty? %>
-	<div class="applied">
-		<h3 class="center">Applied Jobs:</h3>
-
-		<ul>
-		<% @applied_jobs.each do |job| %>
-			<li><%= link_to job.title, job %> at <%= job.cname %></li>
-		<%  end %>
-		</ul>
-
-	</div>
-<% end %>
+<%= render 'shared/applied-jobs'%>

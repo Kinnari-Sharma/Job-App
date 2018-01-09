@@ -1,0 +1,15 @@
+
+<% unless @applied_jobs.empty? %>
+	<div class="applied">
+		<h3 class="center">Applied Jobs:</h3>
+
+		<ul>
+		<% @applied_jobs.each do |job| %>
+			<% if job.approved? %>
+				<li><%= link_to job.title, admin_job_path(job) %> at <%= job.cname %></li>
+			<% end %>
+		<%  end %>
+		</ul>
+
+	</div>
+<% end %>

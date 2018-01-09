@@ -5,9 +5,9 @@ module Admin
 			@jobtype = Jobtype.new(jobtype_params)
 
 			if @jobtype.save
-				redirect_to root_path, flash: { success: "Jobtype added!" }
+				redirect_to admin_path, flash: { success: "Jobtype added!" }
 			else
-				redirect_to root_path, flash: { warning: "Jobtype invalid!" }
+				redirect_to admin_path, flash: { warning: "Jobtype invalid!" }
 			end
 
 		end
@@ -17,7 +17,7 @@ module Admin
 			@jobtype = Jobtype.find(params[:id])
 			@jobtype.destroy
 			
-			redirect_to root_url, flash: { success: "Job type removed!" }
+			redirect_to admin_url, flash: { success: "Job type removed!" }
 		end
 
 		private

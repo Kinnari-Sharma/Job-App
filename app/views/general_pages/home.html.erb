@@ -2,6 +2,7 @@
   
   <% if current_user.admin? %>
     <%= render 'admin/home'%>
+
   <% else %>
     <%= render 'shared/jobseeker_home' %>
   <% end %>

@@ -1,0 +1,17 @@
+<% provide(:title, "Jobs") %>
+
+<% if @jobs.blank? %>
+  <h4><%= params[:search] %> Not found. Please search properly!</h4>
+
+
+<% else %>
+	<div class="row">	
+		<div class="col-md-9"> 
+			<h1 class="center">Jobs</h1>
+  		<%= render 'admin/jobs/jobs' %>
+  	</div>
+  	<div class="col-md-3">
+  		
+  	</div>
+  </div>
+<% end %>

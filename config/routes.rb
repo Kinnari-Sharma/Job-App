@@ -13,9 +13,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :categories, only: [ :create, :destroy]
     resources :jobtypes, only: [ :create, :destroy]
-    #resources :users, only: [:index, :destroy, :show, :edit, :update]
     resources :users, except: [:new, :create]
-    resources :jobs, only: [:destroy, :update]
+    resources :jobs, only: [:destroy, :update, :show, :index]
   end
   get '/auth/linkedin/callback', to: 'sessionlinkedin#create'
   resources :users, except: [:index, :destroy]

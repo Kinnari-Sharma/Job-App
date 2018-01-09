@@ -10,12 +10,10 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @jobs = @user.jobs.paginate(page: params[:page])
-    unless @user.admin?
-      @applieds = Applied.where(user_id: current_user.id).to_a
-      @applied_jobs = []
-      @applieds.each do |a|
-        @applied_jobs.append(Job.find_by(id: a.job_id))
-      end
+    @applieds = Applied.where(user_id: params[:id]).to_a
+    @applied_jobs = []
+    @applieds.each do |a|
+      @applied_jobs.append(Job.find_by(id: a.job_id))
     end
   end
 

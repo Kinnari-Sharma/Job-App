@@ -15,8 +15,25 @@ module Admin
 
 	  def destroy
     	Job.find(params[:id]).destroy
-    	redirect_to root_url, flash: { success: "Job Deleted Successfully!" }
+    	redirect_to admin_url, flash: { success: "Job Deleted Successfully!" }
   	end
+
+    def show
+      @job = Job.find(params[:id])
+      @applied = Applied.new
+      @applicants_ids = Applied.where(job_id: params[:id])
+      @applicants = []
+      @applicants_ids.each do |applicant|
+        @applicants.append(User.find(applicant.user_id))
+      end
+    end
+
+    def index
+      
+      @jobs = Job.search(params[:search], params[:search_location], params[:category]).
+                                             order("created_at DESC").
+                                           paginate(page: params[:page])
+    end
 
   	private
 

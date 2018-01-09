@@ -5,9 +5,9 @@ module Admin
 		def create
 			@category = Category.new(category_params)
 			if @category.save
-				redirect_to root_path, flash: { success: "Sector added!" }
+				redirect_to admin_path, flash: { success: "Sector added!" }
 			else
-				redirect_to root_path, flash: { success: "Invalid Sector!" }
+				redirect_to admin_path, flash: { success: "Invalid Sector!" }
 			end
 
 		end
@@ -15,7 +15,7 @@ module Admin
 		def destroy
 			@category = Category.find(params[:id])
 			@category.destroy
-			redirect_to root_url, flash: { success: "Category removed!" }
+			redirect_to admin_url, flash: { success: "Category removed!" }
 		end
 
 		private

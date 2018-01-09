@@ -1,0 +1,23 @@
+<% if @applicants.empty? %>
+	<p class="center">There are no applicants yet!</p>
+<% else %>
+	<h2 class = "center">Applicants</h2>
+	<div class = "applicants_list">
+		<table>
+		
+			<% @applicants.each do |user| %>
+				<% applicant = @applicants_ids.find_by(user_id: user.id) %>		
+				 <tr>
+					  <td><%= link_to "#{user.name}", admin_user_path(user) %></td>
+					  <td><%= link_to "Uploaded Resume", applicant.resume.url, target: "_blank" %> </td>
+					  
+					  <% if applicant.apply? %>
+					  	<td>Accepted</td>
+					  <% else %>
+	 				    <td>Not yet accepted by recruiter</td>
+	  				<% end %>
+				  </tr>
+			<% end %>
+		</table>
+	</div>
+<% end %>

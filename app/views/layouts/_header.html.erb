@@ -6,12 +6,10 @@
     
     <nav>
       <div class="search">
-        <%= form_tag(jobs_path, method: "get", id: "search-form") do %>
-          <%= text_field_tag :search, params[:search], placeholder: "Search Jobs", class: "form-field" %>
-          <%= text_field_tag :search_location, params[:search_location], placeholder: "Search location",                                                                       class: "form-field"  %>
-          <%= select_tag 'category', options_for_select(Category.all.collect{ |c| c.job_category} ),
-                                              include_blank: "Categories", class: "form-field" %>
-          <%= submit_tag "Search", name: nil %>
+        <% if current_user && current_user.admin? %>
+          <%= render 'admin/admin-search-form'%>
+        <% else %>
+          <%= render 'users/search-form'%>
         <% end %>
       </div>
       <ul class="nav navbar-nav navbar-right">
@@ -39,7 +37,6 @@
             </a>
             <ul class="dropdown-menu">
               <% if current_user.admin? %>
-                <li><%= link_to "Profile", admin_user_path(current_user) %></li>
                 <li><%= link_to "Settings", edit_admin_user_path(current_user) %></li>
               <% else %>
                 <li><%= link_to "Profile", current_user %></li>

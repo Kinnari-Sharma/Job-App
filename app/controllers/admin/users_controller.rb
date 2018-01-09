@@ -14,7 +14,13 @@ module Admin
   	end
 
     def show
-      @user = current_user
+      @user = User.find(params[:id])
+      @jobs = @user.jobs.paginate(page: params[:page])
+      @applieds = Applied.where(user_id: params[:id]).to_a
+      @applied_jobs = []
+      @applieds.each do |a|
+        @applied_jobs.append(Job.find_by(id: a.job_id))
+      end
     end
   
     def edit
@@ -25,7 +31,7 @@ module Admin
       @user = current_user
 
       if @user.update_attributes(update_params)
-        redirect_to admin_user_path(@user), flash: { success: "Update Successful!" }
+        redirect_to admin_path(@user), flash: { success: "Update Successful!" }
       else
         render 'edit'
       end

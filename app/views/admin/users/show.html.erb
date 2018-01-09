@@ -7,4 +7,15 @@
         <%= @user.name %>
       </h1>
     </section>
+
+    
+      <%= render 'applied-jobs'%>
+    
   </aside>
+
+  <div class="col-md-8">
+    <% unless @user.admin? %>
+      <%= render 'recruiter' %>
+    <% end %>
+  </div>
+</div>
