@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :jobs, only: [:destroy, :update, :show, :index]
   end
   get '/auth/linkedin/callback', to: 'sessionlinkedin#create'
+  get '/auth/failure', to: 'sessionlinkedin#failure'
   resources :users, except: [:index, :destroy]
   resources :jobs, except: [:update, :destroy]
   resources :applieds, only: [:create, :update]

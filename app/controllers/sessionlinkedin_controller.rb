@@ -1,4 +1,5 @@
 class SessionlinkedinController < ApplicationController
+	
 	def create
 	  begin
 	    user = User.from_omniauth(request.env['omniauth.auth'])
@@ -18,4 +19,8 @@ class SessionlinkedinController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end
+	
+	def failure
+	  redirect_to login_path
+	end
 end
