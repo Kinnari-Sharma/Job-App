@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   has_many :jobs, dependent: :destroy
   has_many :conversations, foreign_key: :sender_id, dependent: :destroy
-
+  has_many :conversations, foreign_key: :recipent_id, dependent: :destroy
   
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
