@@ -16,10 +16,9 @@
 		  																						admin_user_path(@job.user) %> <br>			
 			
 			<% if @job.approved? %>		  														
-				<%= link_to "reject", admin_job_path(@job, approved: false),	method: :patch %>
+				<%= reject_link(@job) %>
 		  <% else %>
-   		  <span>Not yet approved! <%= link_to "approve", admin_job_path(@job, approved: true),
-   		  																			 method: :patch, class: "review"%> </span> 
+   		  <span>Not yet approved! <%= approve_link(@job) %> </span> 
    		<% end %>	  							
 		</div>
 		<%= render 'applicants' %>

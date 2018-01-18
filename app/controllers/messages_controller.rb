@@ -1,7 +1,5 @@
 class MessagesController < ApplicationController
-	before_action do
-		@conversation = Conversation.find(params[:conversation_id])
-	end
+	before_action :get_conversation
 	before_action :logged_in_user
 	before_action :authorized_user, only: :index
 
@@ -53,6 +51,10 @@ class MessagesController < ApplicationController
 	  	unless @conversation.sender_id == current_user.id || @conversation.recipent_id == current_user.id
 	  		redirect_to conversations_path(current_user), flash: { warning: "Unauthorized Access" }
 	  	end
+	  end
+
+	  def get_conversation
+	  	@conversation = Conversation.find(params[:conversation_id])
 	  end
 
 end

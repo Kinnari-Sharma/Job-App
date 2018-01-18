@@ -1,5 +1,6 @@
 class JobsController < ApplicationController
 before_action :logged_in_user
+before_action :get_job, only: [:show, :edit, :destroy, :update]
  
   def new
   	@job = current_user.jobs.build
@@ -16,7 +17,6 @@ before_action :logged_in_user
 
 
   def show
-  	@job = Job.find(params[:id])
     @applied = Applied.new
     @applicants_ids = Applied.where(job_id: params[:id])
     @applicants = []
@@ -33,16 +33,14 @@ before_action :logged_in_user
   end
 
   def destroy
-    Job.find(params[:id]).destroy
+    @job.destroy
     redirect_to current_user, flash: { success: "Job Deleted Successfully!" }
   end
 
   def edit
-    @job = Job.find(params[:id])
   end
 
   def update
-    @job = Job.find(params[:id])
     if @job.update_attributes(update_params)
       redirect_to @job
     else
@@ -65,5 +63,9 @@ before_action :logged_in_user
     def update_params
       params.require(:job).permit(:title, :description, :sector,
                                   :jobtype, :cname, :url, :contactmail, :location)
+    end
+
+    def get_job
+      @job = Job.find(params[:id])
     end
 end

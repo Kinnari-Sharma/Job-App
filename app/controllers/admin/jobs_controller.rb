@@ -2,9 +2,9 @@ module Admin
 	class JobsController < ApplicationController
 		before_action :logged_in_user
 		before_action :admin?
+    before_action :get_job, only: [:show, :update, :destroy]
 
     def show
-      @job = Job.find(params[:id])
       @applied = Applied.new
       @applicants_ids = Applied.where(job_id: params[:id])
       @applicants = []
@@ -21,13 +21,12 @@ module Admin
     end
 
 		def update
-	    @job = Job.find(params[:id])
       @job.update_attributes(update_params) 
 	    redirect_to admin_path
 	  end
 
 	  def destroy
-    	Job.find(params[:id]).destroy
+    	@job.destroy
     	redirect_to admin_url, flash: { success: "Job Deleted Successfully!" }
   	end
 
@@ -49,6 +48,10 @@ module Admin
 
     def update_params
       params.permit(:approved)
+    end
+
+    def get_job
+      @job = Job.find(params[:id])
     end
 
 	end

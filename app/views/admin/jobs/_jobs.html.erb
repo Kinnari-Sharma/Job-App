@@ -10,19 +10,15 @@
 		                                  data: { confirm: "You sure?" } %>
 
 		    <% if job.approved.nil? %>
-		    	<%= link_to "approve", admin_job_path(job, approved: true),
-		    														 			method: :patch, class: "review" %>
-		    	<%= link_to "reject", admin_job_path(job, approved: false),
-		    																	 method: :patch, class: "review" %>
+		    	<%= approve_link(job) %>
+		    	<%= reject_link(job) %>
 		    
 		    <% else %>
 			    <% if job.approved? %>
 			      <span class="review">approved</span>
-			      <%= link_to "reject", admin_job_path(job, approved: false),
-			      																			 method: :patch, class: "review"%>
+			      <%= reject_link(job) %>
 			    <% else %>
-			      <%= link_to "approve", admin_job_path(job, approved: true),
-			      																			 method: :patch, class: "review"%>
+			      <%= approve_link(job) %>
 			      <span class="review">rejected</span>
 			    <% end %>
 			  <% end %>  

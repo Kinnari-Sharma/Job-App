@@ -3,18 +3,18 @@ module Admin
 		
 		before_action :admin_user,     only: [:index, :destroy]
 		before_action :logged_in_user, only: [:index, :destroy]
+    before_action :get_user, only: [:show, :destroy]
 
 		def index
     	@users = User.paginate(page: params[:page])
   	end
   	
   	def destroy
-    	User.find(params[:id]).destroy
+    	@user.destroy
     	redirect_to admin_users_url, flash: { success: "User deleted" }
   	end
 
     def show
-      @user = User.find(params[:id])
       @jobs = @user.jobs.paginate(page: params[:page])
       @applieds = Applied.where(user_id: params[:id]).to_a
       @applied_jobs = []
@@ -53,6 +53,10 @@ module Admin
     # Confirms an admin user.
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+    
+    def get_user
+      @user = User.find(params[:id])
     end
 
   end

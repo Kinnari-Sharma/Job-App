@@ -1,8 +1,8 @@
 class User < ApplicationRecord
 
   before_save { self.email = email.downcase }
+  
   has_many :applieds, dependent: :destroy
-
   has_many :jobs, dependent: :destroy
   has_many :conversations, foreign_key: :sender_id, dependent: :destroy
   has_many :conversations, foreign_key: :recipent_id, dependent: :destroy
