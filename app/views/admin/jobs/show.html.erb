@@ -15,9 +15,10 @@
 		  <span class="type">Posted by: </span> <%= link_to "#{@job.user.name}", 
 		  																						admin_user_path(@job.user) %> <br>			
 			
-			<% if @job.approved? %>		  																													<%= link_to "reject", admin_job_path(@job),	method: :patch%>
+			<% if @job.approved? %>		  														
+				<%= link_to "reject", admin_job_path(@job, approved: false),	method: :patch %>
 		  <% else %>
-   		  <span>Not yet approved! <%= link_to "approve", admin_job_path(@job),
+   		  <span>Not yet approved! <%= link_to "approve", admin_job_path(@job, approved: true),
    		  																			 method: :patch, class: "review"%> </span> 
    		<% end %>	  							
 		</div>

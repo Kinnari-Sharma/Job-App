@@ -9,17 +9,26 @@
 		    <%= link_to "delete", admin_job_path(job), method: :delete,
 		                                  data: { confirm: "You sure?" } %>
 
-		    <% if job.approved? %>
-		      <span class="review">approved</span>
-		      <%= link_to "reject", admin_job_path(job), method: :patch, class: "review"%>
+		    <% if job.approved.nil? %>
+		    	<%= link_to "approve", admin_job_path(job, approved: true),
+		    														 			method: :patch, class: "review" %>
+		    	<%= link_to "reject", admin_job_path(job, approved: false),
+		    																	 method: :patch, class: "review" %>
+		    
 		    <% else %>
-		      <%= link_to "approve", admin_job_path(job), method: :patch, class: "review"%>
-		      <span class="review">rejected</span>
-		    <% end %>
-
-		    <span class="review">Posted at: </span> <%= job.created_at %>
-		     <span class="review">By</span> <%= link_to job.user.name, admin_user_path(job.user) %>
-		  <% end %>
+			    <% if job.approved? %>
+			      <span class="review">approved</span>
+			      <%= link_to "reject", admin_job_path(job, approved: false),
+			      																			 method: :patch, class: "review"%>
+			    <% else %>
+			      <%= link_to "approve", admin_job_path(job, approved: true),
+			      																			 method: :patch, class: "review"%>
+			      <span class="review">rejected</span>
+			    <% end %>
+			  <% end %>  
+			    <span class="review">Posted at: </span> <%= job.created_at %>
+			    <span class="review">By</span> <%= link_to job.user.name, admin_user_path(job.user) %>
+			  <% end %>
 		</li>
   <% end %>
 </ul>

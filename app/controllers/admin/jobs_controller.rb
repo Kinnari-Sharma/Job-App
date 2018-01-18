@@ -3,21 +3,6 @@ module Admin
 		before_action :logged_in_user
 		before_action :admin?
 
-		def update
-	    @job = Job.find(params[:id])
-      if @job.approved
-       @job.update_attribute(:approved, false) 
-	    else
-        @job.update_attribute(:approved, true)
-      end
-	    redirect_to admin_path
-	  end
-
-	  def destroy
-    	Job.find(params[:id]).destroy
-    	redirect_to admin_url, flash: { success: "Job Deleted Successfully!" }
-  	end
-
     def show
       @job = Job.find(params[:id])
       @applied = Applied.new
@@ -35,6 +20,19 @@ module Admin
                                            paginate(page: params[:page])
     end
 
+		def update
+	    @job = Job.find(params[:id])
+      @job.update_attributes(update_params) 
+	    redirect_to admin_path
+	  end
+
+	  def destroy
+    	Job.find(params[:id]).destroy
+    	redirect_to admin_url, flash: { success: "Job Deleted Successfully!" }
+  	end
+
+    
+
   	private
 
   	def admin?
@@ -49,6 +47,9 @@ module Admin
       end
     end
 
+    def update_params
+      params.permit(:approved)
+    end
 
 	end
 end

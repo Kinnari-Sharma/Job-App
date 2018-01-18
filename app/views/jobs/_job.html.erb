@@ -2,4 +2,8 @@
 <li>
 	<h3><%=link_to job.title, job %></h3>
 	<p><%= job.description %></p>
+	<% if current_user.id == job.user_id %>
+		<%= link_to "delete", job_path(job), method: :delete,
+		                      data: { confirm: "You sure?" } %>
+	<% end %>
 </li>

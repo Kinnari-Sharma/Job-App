@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   end
   get '/auth/linkedin/callback', to: 'sessionlinkedin#create'
   get '/auth/failure', to: 'sessionlinkedin#failure'
+  resources :jobs
   resources :users, except: [:index, :destroy]
-  resources :jobs, except: [:update, :destroy]
   resources :applieds, only: [:create, :update]
   resources :conversations, only: [:index, :create] do
     resources :messages, only: [:new, :index, :create]

@@ -6,7 +6,8 @@
                                   placeholder: "Search location",
                                   class: "form-field"  %>
   <%= select_tag 'category',
-         options_for_select(Category.all.collect{ |c| c.job_category} ),
+         options_for_select(Category.all.collect{ |c| c.job_category}, 
+                                            selected: params[:category] ),
          include_blank: "Categories", class: "form-field" %>
 
   <%= submit_tag "Search", name: nil %>

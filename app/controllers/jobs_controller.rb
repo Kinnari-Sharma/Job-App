@@ -32,7 +32,23 @@ before_action :logged_in_user
                                            paginate(page: params[:page])
   end
 
+  def destroy
+    Job.find(params[:id]).destroy
+    redirect_to current_user, flash: { success: "Job Deleted Successfully!" }
+  end
 
+  def edit
+    @job = Job.find(params[:id])
+  end
+
+  def update
+    @job = Job.find(params[:id])
+    if @job.update_attributes(update_params)
+      redirect_to @job
+    else
+      render 'edit'
+    end
+  end
 
   private
     def job_params
@@ -46,4 +62,8 @@ before_action :logged_in_user
       end
     end
     
+    def update_params
+      params.require(:job).permit(:title, :description, :sector,
+                                  :jobtype, :cname, :url, :contactmail, :location)
+    end
 end

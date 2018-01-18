@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227114207) do
+ActiveRecord::Schema.define(version: 20180118133613) do
 
   create_table "applieds", force: :cascade do |t|
     t.integer "job_id", null: false
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20171227114207) do
     t.string "location"
     t.string "approved_by"
     t.integer "user_id"
-    t.boolean "approved", default: false
+    t.boolean "approved"
     t.index ["user_id", "created_at"], name: "index_jobs_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_jobs_on_user_id"
   end

@@ -45,7 +45,7 @@ i=2
 	url = Faker::Internet.url
 	contactmail = Faker::Internet.safe_email
 	location = Faker::Address.city
-	approved = [true, false]
+#	approved = [true, false]
 	Job.create!(title: title[n%9],
 							description: description,
 							sector: sector[n%5],
@@ -54,8 +54,7 @@ i=2
 							url: url,
 							contactmail: contactmail,
 							location: location,
-							user_id: i,
-							approved: approved[n%2] )
+							user_id: i )
 	i+=2
 
 end

@@ -14,7 +14,11 @@
 		  <span class="type">Visit Us: </span> <%= link_to "#{@job.url}", @job.url %> <br>
 		  <span class="type">Posted by: </span> <%= link_to "#{@job.user.name}", @job.user %> <br>
 		  <% unless @job.approved? %>
-   		  <span>Not yet approved by admin! </span> 
+   		  <span>Not yet approved by admin!
+   		  <% if current_user.id == @job.user_id %>
+   		  	<%= link_to "Edit", edit_job_path %>
+   		  <% end %>
+   		  </span> 
    		<% end %>
 		</div>
 
