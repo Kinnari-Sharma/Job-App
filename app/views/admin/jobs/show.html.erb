@@ -4,16 +4,10 @@
 <div class="row">
 	<div class="col-md-8">
 		<div class="job">
-		  <h3>Description:</h3>
-		  <p class="desc"><%= @job.description %></p>
-		  <span class="type">Sector: </span> <%= @job.sector %> <br>
-		  <span class="type">Job Type: </span> <%= @job.jobtype %> <br>
-		  <span class="type">Company: </span> <%= @job.cname %> <br>
-		  <span class="type">Email: </span> <%= @job.contactmail %> <br>
-		  <span class="type">Location: </span> <%= @job.location %> <br>
-		  <span class="type">Visit Us: </span> <%= link_to "#{@job.url}", @job.url %> <br>
+		  <%= render 'shared/job-desc' %>
+		  
 		  <span class="type">Posted by: </span> <%= link_to "#{@job.user.name}", 
-		  																						admin_user_path(@job.user) %> <br>			
+																						admin_user_path(@job.user) %> <br>			
 			
 			<% if @job.approved? %>		  														
 				<%= reject_link(@job) %>
