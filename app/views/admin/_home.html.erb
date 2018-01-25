@@ -13,7 +13,9 @@
 					  <li><%= c.job_category %> <%=link_to "delete", admin_category_path(c),
 					  																			method: :delete,
 					  																		  data: {confirm: "Are you sure?"} %></li>
+						
 					<% end %>
+
 				</ul>
 			<% end %>
 			<%= form_for @category, url: admin_categories_path do |f| %>

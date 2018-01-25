@@ -9,15 +9,18 @@
 		  <span class="type">Posted by: </span> <%= link_to "#{@job.user.name}", @job.user %> <br>
 		  
 		  <% unless @job.approved? %>
-   		  <span>Not yet approved by admin!
-   		  <% if current_user.id == @job.user_id %>
+		  	<% if @job.approved.nil? %>
+   		  	<span>Not yet approved by admin!</span>
+   		  <% elsif @job.approved == false %>
+   		  	<span>Rejected</span>
+   		  <% end %>
+   		  <% if correct_user?(@job) %>
    		  	<%= link_to "Edit", edit_job_path %>
    		  <% end %>
-   		  </span> 
    		<% end %>
 		</div>
 
-		<% if current_user.id == @job.user_id %>
+		<% if correct_user?(@job) %>
 			<%= render 'applicants_list' %>
 		<% else %>
 		  <%= render 'apply' %>

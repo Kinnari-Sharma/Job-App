@@ -1,7 +1,11 @@
 class JobsController < ApplicationController
 before_action :logged_in_user
+before_action :correct_user, except: [:show, :index]
+before_action :check_status, only: [:show]
 before_action :get_job, only: [:show, :edit, :destroy, :update]
- 
+before_action :approved_job, only: [:edit, :update]
+
+
   def new
   	@job = current_user.jobs.build
   end
@@ -68,4 +72,25 @@ before_action :get_job, only: [:show, :edit, :destroy, :update]
     def get_job
       @job = Job.find(params[:id])
     end
+
+    def approved_job
+      if @job.approved?
+        redirect_to @job, flash: { message: "Your job is approved by admin. No changes required!" }
+      end
+    end
+
+    def correct_user
+      get_job
+      unless helpers.correct_user?(@job)
+        redirect_to current_user, flash: {warning: "You are not authorized for this action" }
+      end
+    end
+
+    def check_status
+      get_job
+      unless helpers.correct_user?(@job) || @job.approved?
+        redirect_to root_path, flash: { warning: "Invalid Job" }
+      end
+    end
+
 end

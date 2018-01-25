@@ -1,7 +1,7 @@
 module Admin
 	class UsersController < ApplicationController
 		
-		before_action :admin_user,     only: [:index, :destroy]
+		before_action :admin_user
 		before_action :logged_in_user, only: [:index, :destroy]
     before_action :get_user, only: [:show, :destroy]
 

@@ -21,7 +21,7 @@ class Job < ApplicationRecord
   def self.search(search, search_location, category)
   	jobs = Job.all
 
-  	unless search.empty?
+  	unless search.blank?
   		jobs = jobs.where("(title LIKE ?) OR (jobtype LIKE ?) OR (sector LIKE ?) OR (cname LIKE ?)",
   										"%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
   	end

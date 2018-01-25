@@ -12,7 +12,11 @@
 			<% if @job.approved? %>		  														
 				<%= reject_link(@job) %>
 		  <% else %>
-   		  <span>Not yet approved! <%= approve_link(@job) %> </span> 
+		  	<% if @job.approved.nil? %>
+   		    <span>Not yet approved! <%= approve_link(@job) %> </span> 
+   		  <% else %>
+   		  	<span>Rejected <%= approve_link(@job) %> </span> 
+   		  <% end %>
    		<% end %>	  							
 		</div>
 		<%= render 'applicants' %>

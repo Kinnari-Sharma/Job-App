@@ -1,5 +1,6 @@
 module Admin
 	class JobtypesController < ApplicationController
+		before_action :admin?
 
 		def create
 			@jobtype = Jobtype.new(jobtype_params)
@@ -24,5 +25,11 @@ module Admin
 		  def jobtype_params
 		  	params.require(:jobtype).permit(:jobtype)
 		  end
+
+		  def admin?
+      	unless current_user.admin?
+        	redirect_to current_user, flash: { warning: "Access Denied!" }
+      	end
+    	end
 	end
 end

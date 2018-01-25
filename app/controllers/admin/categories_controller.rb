@@ -1,6 +1,6 @@
 module Admin
 	class CategoriesController < ApplicationController
-
+		before_action :admin?
 
 		def create
 			@category = Category.new(category_params)
@@ -22,5 +22,11 @@ module Admin
 		  def category_params
 		  	params.require(:category).permit(:job_category)
 		  end
+
+		  def admin?
+      	unless current_user.admin?
+        	redirect_to current_user, flash: { warning: "Access Denied!" }
+      	end
+    	end
 	end
 end
