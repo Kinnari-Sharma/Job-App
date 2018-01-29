@@ -145,7 +145,7 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
-    paperclip (5.1.0)
+    paperclip (5.2.1)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -253,7 +253,7 @@ DEPENDENCIES
   listen (= 3.0.8)
   minitest-reporters (= 1.1.14)
   omniauth-linkedin-oauth2
-  paperclip (~> 5.1)
+  paperclip (~> 5.2, >= 5.2.1)
   pg (= 0.18.4)
   puma (= 3.9.1)
   rails (= 5.1.2)
