@@ -1,6 +1,6 @@
 class JobsController < ApplicationController
 before_action :logged_in_user
-before_action :correct_user, except: [:show, :index]
+before_action :correct_user, only: [:edit, :update, :destroy]
 before_action :check_status, only: [:show]
 before_action :get_job, only: [:show, :edit, :destroy, :update]
 before_action :approved_job, only: [:edit, :update]
@@ -32,8 +32,8 @@ before_action :approved_job, only: [:edit, :update]
   def index
       
     @jobs = Job.search(params[:search], params[:search_location], params[:category]).
-                                           order("created_at DESC").
-                                           paginate(page: params[:page])
+                                        order("created_at DESC").where(approved: true).
+                                        paginate(page: params[:page])
   end
 
   def destroy

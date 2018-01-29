@@ -22,6 +22,7 @@ module Admin
 
 		def update
       @job.update_attributes(update_params) 
+      @job.update_attribute(:approved_by, current_user.name)
 	    redirect_to admin_path
 	  end
 

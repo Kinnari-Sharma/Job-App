@@ -2,6 +2,7 @@ class Job < ApplicationRecord
 
 	belongs_to :user
   has_many :applieds, dependent: :destroy
+  has_many :conversations, dependent: :destroy
 
 	default_scope -> { order(created_at: :desc) }
 
@@ -31,7 +32,6 @@ class Job < ApplicationRecord
   	unless category.blank?
   		jobs = jobs.where("sector LIKE ?", "#{category}")
   	end
-    jobs = jobs.where(approved: true)
   	return jobs
   end
 

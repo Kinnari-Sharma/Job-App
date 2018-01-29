@@ -6,45 +6,44 @@
 
 	<div class="col-md-4">
 		<div class = "category">
-			<h3 class="center">Edit Job Sectors</h3>
+			<h3 class="center">Job Sectors</h3>
 			<% unless @categories.nil? %>
 				<ul class="categories">
 					<% @categories.each do |c| %>
-					  <li><%= c.job_category %> <%=link_to "delete", admin_category_path(c),
+					  <li><%= c.job_category %>
+					  		<%= link_to "Edit", edit_admin_category_path(c) %>
+							  <%=link_to "Delete", admin_category_path(c),
 					  																			method: :delete,
-					  																		  data: {confirm: "Are you sure?"} %></li>
+					  																		  data: {confirm: "Are you sure?"} %>
+					  																		  </li>
 						
 					<% end %>
 
 				</ul>
 			<% end %>
-			<%= form_for @category, url: admin_categories_path do |f| %>
-			  <div class = "form-group" >
-					<%= f.label :job_category, "Job Sector: " %>
-			  	<%= f.text_field :job_category, class: "form-control" %>
-				</div>
-			  <%= f.submit "Add", class: "btn-primary form-control" %>
-			<% end %>
+			
+
+			<%= custom_form(@category, admin_categories_path, "Job Sector", "job_category", "Add") %>
+			
 		</div>
 
 		<div class = "category">
-			<h3 class="center">Edit Job Type</h3>
+			<h3 class="center">Job Types</h3>
 			<% unless @jobtypes.nil? %>
 				<ul class="categories">
 					<% @jobtypes.each do |j| %>
-					  <li><%= j.jobtype %> <%=link_to "delete", admin_jobtype_path(j),
+					  <li><%= j.jobtype %> 
+					  		<%= link_to "Edit", edit_admin_jobtype_path(j) %>
+					  		<%=link_to "Delete", admin_jobtype_path(j),
 					  																			method: :delete,
-					  																		  data: {confirm: "Are you sure?"} %></li>
+					  																		  data: {confirm: "Are you sure?"} %>									
+					  </li>
 					<% end %>
 				</ul>
 			<% end %>
-			<%= form_for @jobtype, url: admin_jobtypes_path do |f| %>
-			  <div class = "form-group" >
-					<%= f.label :jobtype, "Job Type: " %>
-			  	<%= f.text_field :jobtype, class: "form-control" %>
-				</div>
-			  <%= f.submit "Add", class: "btn-primary form-control" %>
-			<% end %>
-			</div>
+			
+			<%= custom_form(@jobtype, admin_jobtypes_path, "Job Type ", "jobtype", "Add" ) %>
+			
+		</div>
 	</div>
 </div>

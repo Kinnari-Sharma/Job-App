@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get '/admin', to: 'admin#home'
   namespace :admin do
-    resources :categories, only: [ :create, :destroy]
-    resources :jobtypes, only: [ :create, :destroy]
+    resources :categories, except: [:new, :show, :index]
+    resources :jobtypes, except: [:new, :show, :index]
     resources :users, except: [:new, :create]
     resources :jobs, only: [:destroy, :update, :show, :index]
   end

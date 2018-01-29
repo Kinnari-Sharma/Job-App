@@ -10,7 +10,7 @@
 																						admin_user_path(@job.user) %> <br>			
 			
 			<% if @job.approved? %>		  														
-				<%= reject_link(@job) %>
+				Approved <%= reject_link(@job) %>
 		  <% else %>
 		  	<% if @job.approved.nil? %>
    		    <span>Not yet approved! <%= approve_link(@job) %> </span> 
